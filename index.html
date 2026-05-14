@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎂祝妳生日快樂🎂</title>
+    <style>
+        /* 基本背景與排版設定 */
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #fff0f5, #ffe4e1);
+            font-family: sans-serif;
+            overflow-x: hidden; /* 防止橫向捲動 */
+        }
+
+        /* 讀取畫面動畫設計 */
+        #loading {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(to bottom, #fff0f5, #ffe4e1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            font-size: 1.2rem;
+            color: #555;
+            transition: opacity 0.5s ease;
+        }
+
+        /* 主要內容區域（一開始先隱藏） */
+        #main-content {
+            display: none; 
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* 漂浮圖案的動畫 */
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+            10% { opacity: 0.9; }
+            90% { opacity: 0.9; }
+            100% { transform: translateY(-20vh) scale(1.2); opacity: 0; }
+        }
+
+        .floating-emoji {
+            position: fixed;
+            top: 0; 
+            z-index: -1; /* 放在背景 */
+            pointer-events: none;
+            animation-name: floatUp;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear; 
+        }
+
+        /* 祝福卡片樣式 */
+        .message-card {
+            background-color: rgba(255, 255, 255, 0.85);
+            padding: 25px 20px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+            text-align: center;
+            margin-top: 20px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .birthday-text {
+            font-size: 1.05rem; 
+            color: #555; 
+            line-height: 1.8; 
+        }
+
+        /* 並排 GIF 的容器 */
+        .gif-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .gif-container img {
+            width: 48%; /* 讓兩張圖各佔約一半 */
+            border-radius: 10px;
+            object-fit: cover;
+        }
+
+        /* 手機排版優化 */
+        @media (max-width: 450px) {
+            .birthday-text {
+                font-size: 0.88rem; 
+            }
+            .message-card {
+                padding: 20px 10px; 
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="loading">正在為妳準備驚喜，請稍等喔...</div>
+
+    <div id="main-content">
+        <div class="message-card">
+            <div class="birthday-text">
+                李芯貝祝妳20歲生日快樂！<br><br>
+                恭喜妳也成為一個20歲的小大人了<br>
+                雖然妳總是對我很客氣也不願意收下我的禮物<br>
+                但是我還是寫了這個小網頁給妳一下<br>
+                希望妳在未來不要再常常被擊垮或者是不開心<br>
+                也不要再被那些討厭的人和事給左右<br>
+                遵循自己所想做自己想做同時也要保護好自己<br>
+                有事情呢還是可以找我幫忙妳可以不用不好意思<br><br>
+                還有什麼時候才要吃飯我都找不到人吃飯💢💢<br><br>
+                祝妳的20歲順利也開心持續有淡淡的幸福出現🎂🎂🎂
+            </div>
+        </div>
+
+        <div class="gif-container">
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdjduZjBva3phdDJmamFsbDVydzl1eG11a3oydG5zZ2hnc2xtY2tmciZlcD12MV9naWZzX3NlYXJjaCZjdD1n/IFjSbBHETzzr6GJdwW/giphy.gif" alt="GIF 1">
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExenBpcG43NmJ3YjlkZm9vaTd5bDh3dHB1ZnJmc25zc2ZiYnpmdHh1ZSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/AgO9VR2a9KW1MSP73I/giphy.gif" alt="GIF 2">
+        </div>
+    </div>
+
+    <script>
+        // 1. 產生 25 個漂浮符號特效
+        const emojis = ['💖', '🎆', '🌸', '✨', '💕', '🎂'];
+        for (let i = 0; i < 25; i++) {
+            let emoji = emojis[Math.floor(Math.random() * emojis.length)];
+            let left = Math.random() * 100;
+            let duration = Math.random() * 15 + 15; // 15 到 30 秒
+            let delay = Math.random() * -30; // 讓一開始畫面上就已經有漂浮物
+            let size = Math.random() * 1 + 1; // 1 到 2 rem
+
+            let div = document.createElement('div');
+            div.className = 'floating-emoji';
+            div.style.left = left + '%';
+            div.style.fontSize = size + 'rem';
+            div.style.animationDuration = duration + 's';
+            div.style.animationDelay = delay + 's';
+            div.innerText = emoji;
+            document.body.appendChild(div);
+        }
+
+        // 2. 模擬 Streamlit 的 spinner，等待 2.5 秒後顯示卡片
+        setTimeout(() => {
+            const loading = document.getElementById('loading');
+            const mainContent = document.getElementById('main-content');
+            
+            // 讓讀取文字淡出
+            loading.style.opacity = '0';
+            
+            setTimeout(() => {
+                loading.style.display = 'none';
+                mainContent.style.display = 'flex'; // 顯示主角
+            }, 500); // 等待淡出動畫結束
+            
+        }, 2500);
+    </script>
+</body>
+</html>

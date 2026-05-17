@@ -112,35 +112,40 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
-        /* 👇 【新增】：伏筆按鍵樣式 */
+        /* 👇 【修改】：加速出現時間，從 3s 改為 0.5s */
         #secret-button-container {
             margin-top: 40px;
             margin-bottom: 30px;
             text-align: center;
             width: 100%;
             opacity: 0; /* 初始隱藏 */
-            animation: fadeIn 1s ease 3s forwards; /* 延遲 3 秒後淡入 */
+            animation: fadeIn 0.8s ease 0.5s forwards; /* 延遲 0.5 秒後迅速淡入 */
         }
         @keyframes fadeIn { 100% { opacity: 1; } }
 
+        /* 👇 【修改】：加上亮色發光方框設計 */
         .secret-btn {
-            background: none;
-            border: 1px dashed #ffb6c1;
-            color: #ff69b4;
-            padding: 12px 24px;
-            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.9); /* 微白的背景 */
+            border: 2px solid #ff69b4; /* 亮粉色實線邊框 */
+            box-shadow: 0 0 15px rgba(255, 105, 180, 0.5); /* 微微發光的粉色陰影 */
+            color: #d81b60; /* 深一點的粉色字體，比較明顯 */
+            font-weight: bold; /* 字體加粗 */
+            padding: 12px 28px;
+            font-size: 1.05rem;
             border-radius: 30px;
             cursor: pointer;
             transition: all 0.3s ease;
             letter-spacing: 1px;
         }
+        /* 滑鼠移過去或點擊時的按鈕變化 */
         .secret-btn:hover {
-            background-color: rgba(255, 182, 193, 0.2);
-            border-style: solid;
+            background-color: #ff69b4;
+            color: #ffffff;
+            box-shadow: 0 0 25px rgba(255, 105, 180, 0.8); /* 發光更強 */
             transform: scale(1.05);
         }
 
-        /* 👇 【新增】：秘密信紙頁面樣式（隱藏） */
+        /* 秘密信紙頁面樣式（隱藏） */
         #secret-content {
             display: none; 
             flex-direction: column;
@@ -203,8 +208,8 @@
                 padding: 20px 10px; 
             }
             .secret-btn {
-                font-size: 0.9rem;
-                padding: 10px 20px;
+                font-size: 0.95rem;
+                padding: 12px 20px;
             }
             #secret-content {
                 padding: 30px 15px;
@@ -328,7 +333,7 @@
             hideLoadingAndShowContent('main-content');
         }, 2500);
 
-        // 👇 【新增】：顯示秘密內容的邏輯
+        // 顯示秘密內容的邏輯
         function showSecret() {
             // 先顯示讀取畫面，模擬「開啟心扉」的過程
             const loading = document.getElementById('loading');
